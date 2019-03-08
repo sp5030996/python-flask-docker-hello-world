@@ -1,7 +1,5 @@
-FROM python:2.7
-MAINTAINER Shekhar Gulati "shekhargulati84@gmail.com"
-COPY . /app
-WORKDIR /app
-RUN pip install -r requirements.txt
-ENTRYPOINT ["python"]
-CMD ["app.py"]
+FROM ubuntu:16.04
+RUN apt-get update && apt-get install -y python python-pip
+RUN PIP install flask
+COPY app.py /opt/
+ENTRYPOINT FLASK_APP=/opt/app.py flask --host=0.0.0.0 --port=8080
